@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 
 import Waiter from "./Waiter"
+import WaiterProfile from "./WaiterProfile"
 
 class WaiterList extends Component {
 
@@ -11,14 +12,16 @@ class WaiterList extends Component {
 
 			<>
 
-				{this.props.waiters.map((waiter, i) => {
+				{/* {this.props.waiters.map((waiter, i) => {
 					return (
 						<Waiter 
 						waiter={waiter} 
 						key={i}
 						/>
 					)
-				})}
+				})} */}
+
+				<WaiterProfile waiters={this.props.waiters}/>
 				
 			</>
 		);

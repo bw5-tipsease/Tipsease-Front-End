@@ -1,8 +1,9 @@
 export const data = [
 
 	{
-		thumb: "https://dummyimage.com/100x100/c4c6e6/000000.jpg&text=Waiter+Thumbnail",
-		img: "",
+		id: 1,
+		thumb: "https://i.ibb.co/ZHLx5ht/selfport0.jpg",
+		img: "https://i.ibb.co/N1VK5LQ/selfport0.jpg",
 		name: "Brett Baker",
 		username: '@brettBaker',
 		title: "Bartender",
@@ -27,6 +28,7 @@ export const data = [
 		
 	},
 	{
+		id: 2,
 		thumb: "https://dummyimage.com/100x100/c4c6e6/000000.jpg&text=Waiter+Thumbnail",
 		img: "",
 		name: "Kate Clark",
@@ -52,6 +54,7 @@ export const data = [
 		]
 	},
 	{
+		id: 3,
 		thumb: "https://dummyimage.com/100x100/c4c6e6/000000.jpg&text=Waiter+Thumbnail",
 		img: "",
 		name: "Will Krul",
@@ -77,6 +80,7 @@ export const data = [
 		]
 	},
 	{
+		id: 4,
 		thumb: "https://dummyimage.com/100x100/c4c6e6/000000.jpg&text=Waiter+Thumbnail",
 		img: "",
 		name: "Owen Higby",
