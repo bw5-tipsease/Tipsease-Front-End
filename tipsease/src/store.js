@@ -29,8 +29,8 @@ export const data = [
 	},
 	{
 		id: 2,
-		thumb: "https://dummyimage.com/100x100/c4c6e6/000000.jpg&text=Waiter+Thumbnail",
-		img: "",
+		thumb: "https://i.ibb.co/HTs9C58/image.png",
+		img: "https://i.ibb.co/yF1xpHj/image.png",
 		name: "Kate Clark",
 		username: '@kateClark',
 		title: "Server",
@@ -55,8 +55,8 @@ export const data = [
 	},
 	{
 		id: 3,
-		thumb: "https://dummyimage.com/100x100/c4c6e6/000000.jpg&text=Waiter+Thumbnail",
-		img: "",
+		thumb: "https://i.ibb.co/XycBsVr/image.png",
+		img: "https://i.ibb.co/WDm9ys4/image.png",
 		name: "Will Krul",
 		username: '@willKrul',
 		title: "Hostess",
@@ -81,8 +81,8 @@ export const data = [
 	},
 	{
 		id: 4,
-		thumb: "https://dummyimage.com/100x100/c4c6e6/000000.jpg&text=Waiter+Thumbnail",
-		img: "",
+		thumb: "https://i.ibb.co/0GH2tx1/image.png",
+		img: "https://i.ibb.co/nLxmCF4/image.png",
 		name: "Owen Higby",
 		username: '@owenhig',
 		title: "Server",

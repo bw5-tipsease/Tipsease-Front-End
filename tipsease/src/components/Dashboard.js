@@ -27,13 +27,13 @@ const Dashboard = () => {
 			<>
 				<TopBar />
 
-				{/* <SearchBar />
+				<SearchBar />
 
 				<Typography 
 				className={classes.title}
 				>
 					Service Worker
-				</Typography>			 */}
+				</Typography>			
 
 				<WaiterList />
 

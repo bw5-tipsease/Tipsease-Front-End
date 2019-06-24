@@ -12,16 +12,16 @@ class WaiterList extends Component {
 
 			<>
 
-				{/* {this.props.waiters.map((waiter, i) => {
+				{this.props.waiters.map((waiter, i) => {
 					return (
 						<Waiter 
 						waiter={waiter} 
 						key={i}
 						/>
 					)
-				})} */}
+				})}
 
-				<WaiterProfile waiters={this.props.waiters}/>
+				{/* <WaiterProfile waiters={this.props.waiters}/> */}
 				
 			</>
 		);
