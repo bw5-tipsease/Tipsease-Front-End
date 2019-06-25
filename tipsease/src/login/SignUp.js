@@ -1,6 +1,11 @@
-import React from 'react';
-import { AppBar, Toolbar, Typography, Paper, TextField, Button, InputLabel }   from '@material-ui/core/';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react';
+import { connect } from "react-redux";
+import { AppBar, Toolbar, Typography, Paper, TextField, Button, InputLabel, FormControl }   from '@material-ui/core/';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { Link, NavLink } from 'react-router-dom'
+import { MuiInputLabel } from '@material-ui/core'
+import TopBarHome from './TopBarHome';
+
 
 
 const useStyles = makeStyles({
@@ -64,73 +69,73 @@ const useStyles = makeStyles({
 const SignUp = (props) => {
 	const classes = useStyles();
 
-	return (
+	const [state, setState] = useState({
+		credentials: {		
+			name: '',
+			password: '',
+			email: ''
+		}
+	})
 
+	const handleChanges = e => {
+		console.log(e.target.value)
+		setState({
+			credentials: {
+				...state.credentials,
+				[e.target.name]: e.target.value
+			} 			 
+		});
+	}
+
+	const signup = e => {
+		e.preventDefault()
+		console.log("works")
+	}
+	
+	return (		
 		<>
-			<AppBar className={classes.appBar} position="static" color="inherit" >
-				<Toolbar>
+			<TopBarHome />
 
-					<Typography
-					className={classes.headerText} 
-					align="justify"
-					variant="h6" 
-					>
-						About
-					</Typography> 
-
-					<Typography
-					className={classes.headerText} 
-					align="justify"
-					variant="h6" 
-					>
-						Tipsease
-					</Typography> 
-
-					<Typography
-					className={classes.headerText} 
-					align="justify"
-					variant="h6" 
-					>
-						Sign In
-					</Typography> 
-
-				</Toolbar>
-			</AppBar>
-		
-			<Paper>
+			<Paper style={{ borderRadius: 0, }}>
 
 				<img className={classes.img} src="https://i.ibb.co/jRkzxZZ/Sign-Up-Graphic.png" alt="tipsease"></img>
 				<Typography className={classes.title}>Create an account</Typography>
 
+				<form className="signupForm" onSubmit={signup}>
 				<TextField
+					value={state.name}
+					name="name"
 					label="Name"
-					id="margin-none"
-					className={classes.textField}
-					classes={{
-						animated: classes.animated
-					}}									
+					onChange={handleChanges}
+					className={classes.textField}								
 				/>
 
 				<TextField
+					value={state.email}
+					name="email"
 					label="Email"
-					id="margin-none"
-					className={classes.textField}					
+					onChange={handleChanges}
+					className={classes.textField}							
 				/>
 
 				<TextField
+					value={state.password}
+					name="password"
 					label="Password"
-					id="margin-none"
+					onChange={handleChanges}
 					className={classes.textField}					
 				/>	
 
-				<Button className={classes.buttonSign}>
+				<button className={classes.buttonSign}>
         			Sign Up
-      			</Button>
-
-				<button className={classes.buttonAccount}>
-       				Have an account?
       			</button>
-							
+				</form>	
+
+				<FormControl> 
+					<button onClick={() => console.log("account")}className={classes.buttonAccount}>
+						Have an account?
+					</button>	
+				</FormControl>
 
 			</Paper>
 		</>
@@ -138,4 +143,15 @@ const SignUp = (props) => {
 
 }
 
-export default SignUp;
+const mapStateToProps = (state) => {
+	console.log(state.loginReducer.loggingIn)
+  
+	return {
+		signingIn: state.loginReducer.loggingIn,
+		error: state.loginReducer.error
+	}
+}
+
+
+export default connect(mapStateToProps, {})(SignUp);
+
