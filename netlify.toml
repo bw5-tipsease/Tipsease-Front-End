@@ -1,6 +1,6 @@
 [build]
 base = "/tipsease"
-publish = "/tipsease"
+publish = "/"
 command = "yarn build"
 
 [[redirects]]
