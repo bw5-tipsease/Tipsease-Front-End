@@ -6,7 +6,13 @@ const useStyles = makeStyles({
 
 	headerText: {
 		margin: '0 auto',
-		color: '#2196f3'
+		color: '#339EF9',
+		fontSize: '24px',
+		letterSpacing: '-0.77px',
+		lineHeight: '28px'
+	},
+	appBar: {
+		height: '50px'
 	}
 
   });
@@ -17,7 +23,7 @@ const TopBar = (props) => {
 
 	return (
 
-		<AppBar position="static" color="inherit">
+		<AppBar className={classes.appBar} position="static" color="inherit" >
 			<Toolbar>
 				<Typography
 				className={classes.headerText} 

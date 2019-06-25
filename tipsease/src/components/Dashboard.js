@@ -8,6 +8,8 @@ import WaiterList from "./WaiterList"
 import TopBar from "./TopBar"
 import SearchBar from "./SearchBar"
 import WaiterProfile from "./WaiterProfile"
+import BoottomBar from "./BottomBar"
+import TipPage from "./TipPage"
 
 const useStyles = makeStyles({
 
@@ -27,7 +29,7 @@ const Dashboard = () => {
 			<>
 				<TopBar />
 
-				<SearchBar />
+				{/* <SearchBar />
 
 				<Typography 
 				className={classes.title}
@@ -35,7 +37,11 @@ const Dashboard = () => {
 					Service Worker
 				</Typography>			
 
-				<WaiterList />
+				<WaiterList /> */}
+
+				<TipPage />
+
+				{/* <BoottomBar /> */}
 
 			</>
 		);
