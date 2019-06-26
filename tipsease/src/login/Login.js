@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from "react-redux";
-import { AppBar, Toolbar, Typography, Paper, TextField, Button, InputLabel }   from '@material-ui/core/';
+import { AppBar, Toolbar, Typography, Paper, TextField, Button, InputLabel, Grid }   from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 import TopBarHome from './TopBarHome';
 
@@ -13,6 +13,10 @@ const useStyles = makeStyles({
 		fontSize: '24px',
 		letterSpacing: '-0.77px',
 		lineHeight: '28px'
+	},
+	paper: {
+		borderRadius: 0,
+		paddingBottom: '68px'
 	},
 	title: {
 		color: '#339EF9',
@@ -46,16 +50,19 @@ const useStyles = makeStyles({
 		width: '258px',
 		border: '1px solid #808080',
 		borderRadius: '6px',
+		display: 'block',
 		backgroundColor: '#FFFFFF',
 		marginTop: '30px',
-		marginLeft: '79px',
+		margin: '0 auto',
 		color: '#339EF9',
 		fontSize: '16px',
 		letterSpacing: '-0.2px',
 		lineHeight: '19px'
 	},
 	img: {
-		margin: '15px 110px'
+		display: 'block',
+		margin: '0 auto',
+		paddingTop: '15px'
 	},
 	animated: {
 		color: 'red'
@@ -88,43 +95,54 @@ const Login = (props) => {
 		console.log("works")
 	}
 
+	const goSignUp = e => {
+		e.preventDefault() 
+		props.history.push('/') 
+	}
+
 	return (
 		<>
 			<TopBarHome />
 
-			<Paper style={{ borderRadius: 0, }}>
+			<Paper className={classes.paper}>
+				<Grid container>
+					
+					<Grid item>
+						<img className={classes.img} src="https://i.ibb.co/CmY9CWs/Sign-In-Graphic.png" alt="tipsease"></img>
+					</Grid>
 
-				<img className={classes.img} src="https://i.ibb.co/CmY9CWs/Sign-In-Graphic.png" alt="tipsease"></img>
-				<Typography className={classes.title}>Welcome back!</Typography>
+					<Grid item>
+						<form className="loginForm" onSubmit={login}>
+						<Typography className={classes.title}>Welcome back!</Typography>
+							<TextField
+								value={state.name}
+								name="loginName"
+								label="Username/Email"
+								onChange={handleChanges}
+								className={classes.textField}								
+							/>
 
-				<form className="loginForm" onSubmit={login}>
-					<TextField
-						value={state.name}
-						name="loginName"
-						label="Username/Email"
-						onChange={handleChanges}
-						className={classes.textField}								
-					/>
+							<TextField
+								value={state.password}
+								name="password"
+								label="Password"
+								onChange={handleChanges}
+								className={classes.textField}					
+							/>	
 
-					<TextField
-						value={state.password}
-						name="password"
-						label="Password"
-						onChange={handleChanges}
-						className={classes.textField}					
-					/>	
+							<Button className={classes.buttonSign}>
+								Sign In
+							</Button>
+							</form>
 
-					<Button className={classes.buttonSign}>
-						Sign In
-					</Button>
-				</form>
-
-				<form>
-					<button className={classes.buttonAccount}>
-						Need an account?
-					</button>
-				</form>							
-
+						<form>
+							<button onClick={goSignUp} className={classes.buttonAccount}>
+								Need an account?
+							</button>
+						</form>
+					</Grid>							
+				
+				</Grid>
 			</Paper>
 		</>
 	)

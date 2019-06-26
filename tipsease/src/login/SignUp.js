@@ -17,6 +17,10 @@ const useStyles = makeStyles({
 		letterSpacing: '-0.77px',
 		lineHeight: '28px'
 	},
+	paper: {
+		borderRadius: 0,
+		paddingBottom: '68px'
+	},
 	title: {
 		color: '#339EF9',
 		fontSize: '30px',
@@ -47,18 +51,21 @@ const useStyles = makeStyles({
 	buttonAccount: {
 		height: '40px',
 		width: '258px',
+		display: 'block',
 		border: '1px solid #808080',
 		borderRadius: '6px',
 		backgroundColor: '#FFFFFF',
 		marginTop: '30px',
-		marginLeft: '79px',
+		margin: '0 auto',
 		color: '#339EF9',
 		fontSize: '16px',
 		letterSpacing: '-0.2px',
 		lineHeight: '19px'
 	},
 	img: {
-		margin: '15px 75px'
+		display: 'block',
+   		margin: '0 auto',
+   		paddingTop: '15px'
 	},
 	animated: {
 		color: 'red'
@@ -67,6 +74,7 @@ const useStyles = makeStyles({
 
 
 const SignUp = (props) => {
+	console.log(props)
 	const classes = useStyles();
 
 	const [state, setState] = useState({
@@ -91,17 +99,23 @@ const SignUp = (props) => {
 		e.preventDefault()
 		console.log("works")
 	}
+
+	const goLogin = e => {
+		e.preventDefault() 
+		props.history.push('/login') 
+	}
 	
 	return (		
 		<>
 			<TopBarHome />
 
-			<Paper style={{ borderRadius: 0, }}>
+			<Paper className={classes.paper}>
 
 				<img className={classes.img} src="https://i.ibb.co/jRkzxZZ/Sign-Up-Graphic.png" alt="tipsease"></img>
-				<Typography className={classes.title}>Create an account</Typography>
+				
 
 				<form className="signupForm" onSubmit={signup}>
+				<Typography className={classes.title}>Create an account</Typography>
 				<TextField
 					value={state.name}
 					name="name"
@@ -131,11 +145,13 @@ const SignUp = (props) => {
       			</button>
 				</form>	
 
-				<FormControl> 
-					<button onClick={() => console.log("account")}className={classes.buttonAccount}>
-						Have an account?
-					</button>	
-				</FormControl>
+				<form> 
+					
+						<button onClick={goLogin} className={classes.buttonAccount}>
+							Have an account?
+						</button>
+					
+				</form>
 
 			</Paper>
 		</>

@@ -10,15 +10,12 @@ const SetRoutes = (props) => {
 	return (
 		<div>
 
-			<Route exact path="/" component={SignUp} />
-
+			<Route exact path="/" render={props => (<SignUp {...props}/>)} />
 			<Route path="/login" render={props => (<Login {...props}/>)} />
 
 			{/* <PrivateRoute exact path="/" component={} />	
 
 			<PrivateRoute exact path="/" component={} />	 */}
-
-
 
 		</div>
 	)
