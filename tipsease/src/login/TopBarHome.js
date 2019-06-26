@@ -29,34 +29,34 @@ const TopBarHome = (props) => {
 	return (
 
 		<AppBar className={classes.appBar} position="static" color="inherit" >
-		<Toolbar>
+			<Toolbar>
 
-			<Typography
-			className={classes.headerText} 
-			align="justify"
-			variant="h6" 
-			>
-				About
-			</Typography> 
+				<Typography
+				className={classes.headerText} 
+				align="justify"
+				variant="h6" 
+				>
+					About
+				</Typography> 
 
-			<Typography
-			className={classes.headerText} 
-			align="justify"
-			variant="h6" 
-			>
-				<NavLink className={classes.a} to="/">Tipsease</NavLink>
-			</Typography> 
+				<Typography
+				className={classes.headerText} 
+				align="justify"
+				variant="h6" 
+				>
+					<NavLink className={classes.a} to="/">Tipsease</NavLink>
+				</Typography> 
 
-			<Typography
-			className={classes.headerText} 
-			align="justify"
-			variant="h6" 
-			>
-				<NavLink className={classes.a} to="/login">Sign In</NavLink>
-			</Typography> 
+				<Typography
+				className={classes.headerText} 
+				align="justify"
+				variant="h6" 
+				>
+					<NavLink className={classes.a} to="/login">Sign In</NavLink>
+				</Typography> 
 
-		</Toolbar>
-	</AppBar>
+			</Toolbar>
+		</AppBar>
 
 	)
 }

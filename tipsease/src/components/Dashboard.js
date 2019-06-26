@@ -14,9 +14,12 @@ import TipPage from "./TipPage"
 const useStyles = makeStyles({
 
 	title: {
-		fontFamily: 'fantasy',
-		fontSize: '2rem',
-		marginLeft: '40px'
+		fontFamily: 'Roboto',
+		fontSize: '36px',
+		fontWeight: 'bold',
+		letterSpacing: '-0.45px',
+		lineHeight: '42px',
+		marginLeft: '52px'
 	}
 
   });
@@ -29,7 +32,7 @@ const Dashboard = () => {
 			<>
 				<TopBar />
 
-				{/* <SearchBar />
+				<SearchBar />
 
 				<Typography 
 				className={classes.title}
@@ -37,11 +40,11 @@ const Dashboard = () => {
 					Service Worker
 				</Typography>			
 
-				<WaiterList /> */}
+				<WaiterList />
 
-				<TipPage />
+				{/* <TipPage /> */}
 
-				{/* <BoottomBar /> */}
+				<BoottomBar />
 
 			</>
 		);

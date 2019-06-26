@@ -10,8 +10,8 @@ const useStyles = makeStyles({
 		padding: '2px 4px',
 		display: 'flex',
 		alignItems: 'center',
-		width: '85%',
-		height:'35px',
+		maxWidth: '350px',
+		height: '41px',
    		margin: '20px auto'
 	},
 	input: {
@@ -31,17 +31,18 @@ const SearchBar = (props) => {
 	return (
 
 		<Paper className={classes.paper}>
-			<InputBase
-				className={classes.input}
-				placeholder="Search Service Worker"
-				inputProps={{ 'aria-label': 'Search Google Maps' }}
-			/>
 			<IconButton 
 			className={classes.iconButton} 
 			aria-label="Search"
 			>
 				<SearchIcon />
-			</IconButton>				
+			</IconButton>	
+
+			<InputBase
+				className={classes.input}
+				placeholder="Search Service Worker"
+				inputProps={{ 'aria-label': 'Search Google Maps' }}
+			/>			
 		</Paper>
 
 	)

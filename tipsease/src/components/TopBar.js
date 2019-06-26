@@ -1,5 +1,6 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, }   from '@material-ui/core/';
+import { connect } from "react-redux";
+import { AppBar, Toolbar, Typography, Avatar}   from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -19,6 +20,7 @@ const useStyles = makeStyles({
 
 
 const TopBar = (props) => {
+	console.log(props.waiters[0].name)
 	const classes = useStyles();
 
 	return (
@@ -32,9 +34,17 @@ const TopBar = (props) => {
 				>
 					TipsEase
 				</Typography> 
+				<Avatar alt={props.waiters[0].name} src='https://i.ibb.co/bJHx1V7/DSC0496-rs.png' />				
 			</Toolbar>
 		</AppBar>
 	)
 }
 
-export default TopBar;
+const mapStateToProps = (state) => {
+	console.log(state.waiterReducer.waiters)
+	return {
+		waiters: state.waiterReducer.waiters  
+	}	
+}
+
+export default connect(mapStateToProps, {})(TopBar);

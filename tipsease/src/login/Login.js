@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { AppBar, Toolbar, Typography, Paper, TextField, Button, InputLabel, Grid }   from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 import TopBarHome from './TopBarHome';
+import { tablet } from "../styles/vars"
 
 
 const useStyles = makeStyles({
@@ -64,8 +65,15 @@ const useStyles = makeStyles({
 		margin: '0 auto',
 		paddingTop: '15px'
 	},
-	animated: {
-		color: 'red'
+	gridCont: {
+		paddingTop: '20px',
+
+		[tablet]: {
+			flexDirection: 'row-reverse',
+    		justifyContent: 'space-evenly',
+    		paddingTop: '151px',
+			alignItems: 'end'
+		}
 	}
   });
 
@@ -105,8 +113,8 @@ const Login = (props) => {
 			<TopBarHome />
 
 			<Paper className={classes.paper}>
-				<Grid container>
-					
+				<Grid container direction='column' alignItems='center' className={classes.gridCont}>
+
 					<Grid item>
 						<img className={classes.img} src="https://i.ibb.co/CmY9CWs/Sign-In-Graphic.png" alt="tipsease"></img>
 					</Grid>

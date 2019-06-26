@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from "react-redux";
-import { AppBar, Toolbar, Typography, Paper, TextField, Button, InputLabel, FormControl }   from '@material-ui/core/';
+import { AppBar, Toolbar, Typography, Paper, TextField, Button, InputLabel, FormControl, Grid }   from '@material-ui/core/';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Link, NavLink } from 'react-router-dom'
 import { MuiInputLabel } from '@material-ui/core'
 import TopBarHome from './TopBarHome';
-
+import { tablet } from "../styles/vars"
 
 
 const useStyles = makeStyles({
@@ -67,8 +67,15 @@ const useStyles = makeStyles({
    		margin: '0 auto',
    		paddingTop: '15px'
 	},
-	animated: {
-		color: 'red'
+	gridCont: {
+		paddingTop: '20px',
+
+		[tablet]: {
+			flexDirection: 'row-reverse',
+    		justifyContent: 'space-evenly',
+    		paddingTop: '151px',
+			alignItems: 'end'
+		}
 	}
   });
 
@@ -110,49 +117,53 @@ const SignUp = (props) => {
 			<TopBarHome />
 
 			<Paper className={classes.paper}>
+				<Grid container direction='column' alignItems='center' className={classes.gridCont}>
 
-				<img className={classes.img} src="https://i.ibb.co/jRkzxZZ/Sign-Up-Graphic.png" alt="tipsease"></img>
-				
+					<Grid item>
+						<img className={classes.img} src="https://i.ibb.co/jRkzxZZ/Sign-Up-Graphic.png" alt="tipsease"></img>
+					</Grid>
 
-				<form className="signupForm" onSubmit={signup}>
-				<Typography className={classes.title}>Create an account</Typography>
-				<TextField
-					value={state.name}
-					name="name"
-					label="Name"
-					onChange={handleChanges}
-					className={classes.textField}								
-				/>
+					<Grid item>
+						<form className="signupForm" onSubmit={signup}>
+						<Typography className={classes.title}>Create an account</Typography>
+						<TextField
+							value={state.name}
+							name="name"
+							label="Name"
+							onChange={handleChanges}
+							className={classes.textField}								
+						/>
 
-				<TextField
-					value={state.email}
-					name="email"
-					label="Email"
-					onChange={handleChanges}
-					className={classes.textField}							
-				/>
+						<TextField
+							value={state.email}
+							name="email"
+							label="Email"
+							onChange={handleChanges}
+							className={classes.textField}							
+						/>
 
-				<TextField
-					value={state.password}
-					name="password"
-					label="Password"
-					onChange={handleChanges}
-					className={classes.textField}					
-				/>	
+						<TextField
+							value={state.password}
+							name="password"
+							label="Password"
+							onChange={handleChanges}
+							className={classes.textField}					
+						/>	
 
-				<button className={classes.buttonSign}>
-        			Sign Up
-      			</button>
-				</form>	
-
-				<form> 
-					
-						<button onClick={goLogin} className={classes.buttonAccount}>
-							Have an account?
+						<button className={classes.buttonSign}>
+							Sign Up
 						</button>
-					
-				</form>
+						</form>	
 
+						<form> 
+						
+							<button onClick={goLogin} className={classes.buttonAccount}>
+								Have an account?
+							</button>
+							
+						</form>
+					</Grid>
+				</Grid>
 			</Paper>
 		</>
 	)
