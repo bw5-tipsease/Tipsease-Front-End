@@ -31,11 +31,12 @@ const useStyles = makeStyles({
 		marginTop: '7px',
 	},
 	title: {
-		fontSize: '18px',
+		fontSize: '15px',
 		fontWeight: '300',
+		lineHeight: '24px',
 		letterSpacing: '-0.38px',
-		lineHeight: '21px',
-		marginTop: '5px'
+		fontFamily: "Open Sans",
+		width: '181px'
 	},
 	star: {
 		fontSize: '22px'
@@ -49,53 +50,50 @@ const Waiter = (props) => {
 	console.log(props.waiter.rating)
 	const classes = useStyles();
 
-	const goToTip = e => {
-		e.stopPropagation()
-		props.history.push(`/dashboard/tip/${props.waiter.id}`)
-	}
-	
-	const gotoProfile = e => {
-		console.log("works")
-		props.history.push(`/dashboard/waiter/${props.waiter.id}`)
-	}
+	// const goToTip = e => {
+	// 	console.log(props)
+	// 	console.log("works")
+	// 	props.history.push(`/dashboard/tip/${props.waiter.id}`)
+	// }
 
 	return (
 		
-		<Card className={classes.root} onClick={gotoProfile}>		
+		<Card className={classes.root}>		
 			<Grid container wrap='nowrap' spacing={1}>
 
 				<Grid item xs={4}>
-					<CardMedia className={classes.img} image={props.waiter.thumb} component='img' />
+					<CardMedia className={classes.img} image={props.waiter.locationThumb} component='img' />
 				</Grid>
 
 				<Grid item xs={5}>					
-					<Typography className={classes.name}>{props.waiter.name}</Typography>
-					<Typography className={classes.title}>{props.waiter.title}</Typography>
-					<StarRatingComponent
+					<Typography className={classes.name}>{props.waiter.location}</Typography>
+					<Typography className={classes.title}>{props.waiter.addressStreet}</Typography>
+					<Typography className={classes.title}>{props.waiter.addressCityZip}</Typography>
+					{/* <StarRatingComponent
 						className={classes.star}
 						name={"waiter-rating"} 
 						starColor={"#FFE624"}
 						starCount={5}
 						value={props.waiter.rating}
-					/>
+					/> */}
 				</Grid>
 
-				<Grid item xs className={classes.fabGrid}>
+				{/* <Grid item xs className={classes.fabGrid}>
 
-						<Fab 
-							onClick={goToTip}
-							value={props.waiter.id} 
-							color='primary' 
-							size='small' 
-							variant="extended" 
-							aria-label="Add" 
-							className={classes.fab}
-						>
-							<AddCircle/>
-							Tip
-						</Fab>
-					
-				</Grid>
+					<Fab 
+						onClick={goToTip}
+						value={props.waiter.id} 
+						color='primary' 
+						size='small' 
+						variant="extended" 
+						aria-label="Add" 
+						className={classes.fab}
+					>
+						<AddCircle/>
+						Tip
+					</Fab>
+				
+				</Grid> */}
 
 			</Grid>
 		</Card>

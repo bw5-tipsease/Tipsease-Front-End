@@ -4,7 +4,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from '@material-ui/core/styles';
 
 
-import WaiterList from "./WaiterList"
+import WaiterInfoContainer from "./WaiterInfoContainer"
 import TopBar from "./TopBar"
 import SearchBar from "./SearchBar"
 import WaiterProfile from "./WaiterProfile"
@@ -24,27 +24,23 @@ const useStyles = makeStyles({
 
   });
 
-const Dashboard = () => {	
+const Dashboard = (props) => {
+	console.log(props)	
 	const classes = useStyles();	
 
 		return (
 
 			<>
-				<TopBar />
-
+				<TopBar {...props}/>
 				<SearchBar />
 
-				<Typography 
-				className={classes.title}
-				>
-					Service Worker
-				</Typography>			
+				{/* <Typography className={classes.title}>Service Worker</Typography>			 */}
 
-				<WaiterList />
+				<WaiterInfoContainer {...props}/>
 
-				{/* <TipPage /> */}
+				{/* <Typography className={classes.title}>Transactions</Typography>						 */}
 
-				<BoottomBar />
+				{/* <BoottomBar /> */}
 
 			</>
 		);

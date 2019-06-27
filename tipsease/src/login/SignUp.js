@@ -86,7 +86,7 @@ const SignUp = (props) => {
 
 	const [state, setState] = useState({
 		credentials: {		
-			name: '',
+			username: '',
 			password: '',
 			email: ''
 		}
@@ -109,7 +109,7 @@ const SignUp = (props) => {
 
 	const goLogin = e => {
 		e.preventDefault() 
-		props.history.push('/login') 
+		props.history.push('/') 
 	}
 	
 	return (		

@@ -52,7 +52,7 @@ const TopBarHome = (props) => {
 				align="justify"
 				variant="h6" 
 				>
-					<NavLink className={classes.a} to="/login">Sign In</NavLink>
+					<NavLink className={classes.a} to="/signup">Sign Up</NavLink>
 				</Typography> 
 
 			</Toolbar>

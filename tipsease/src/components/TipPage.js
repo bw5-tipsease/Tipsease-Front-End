@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Paper, TextField, Button, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Check, Money, AttachMoney } from '@material-ui/icons';
+import { connect } from "react-redux";
+import TopBar from "../components/TopBar"
 
 
 
@@ -57,86 +59,98 @@ const useStyles = makeStyles({
 	}
 })
 
-// const numClick = e => {
-// 	console.log(e.target.id)
-// 	setState({
-// 		numInput: e.target.id
-// 	})
-// }
-
-const TipPage = () => {
+const TipPage = (props) => {
 	const classes = useStyles();
-
-	const [state, setState] = useState({
-		numInput: '',
-	})
+	let username = props.waiters[props.match.params.id - 1].username
 	
+	
+	const [tip, setTip] = useState('')
+
+
+
 	const numClick = e => {
 		console.log(e.target.id)
-		setState({
-			numInput: e.target.id
-		})
+
+		if(tip === '') {
+			setTip(e.target.id)
+		} else {
+			setTip(tip + e.target.id)
+		}		
+	}
+
+	const payment = e => {
+		e.preventDefault()
+		console.log('works')
+		props.history.push(`/dashboard/tip/${props.match.params.id}/pay/${username}`) 
 	}
 
 	const nums = ['1','2','3','4','5','6','7','8','9']
 
-		return (
-			<>
-				<Paper className={classes.root}>
+	return (
+		<>
+			<TopBar {...props}/>
+			<Paper className={classes.root}>
 
-					<input
-						className={classes.userNameText}
-						placeholder="@username"
-						type='text'
-						name='username'
-						// value={values.name}
-						onChange={() => {}}
-						margin="normal"
-					/>
+				<input
+					className={classes.userNameText}
+					placeholder="@username"
+					value={username}
+					type='text'
+					name='username'
+					// value={values.name}
+					onChange={() => {}}
+					margin="normal"
+				/>
 
-				</Paper>
+			</Paper>
 
-				<Paper className={classes.tipCont}>
+			<Paper className={classes.tipCont}>
 
-					<Grid container alignItems='center'>
-						<Grid item xs={2}>
-							<AttachMoney style={{ fontSize: 50, color: '#808080' }}/>
-						</Grid>
-						<Grid item xs>
-							<input
-								className={classes.tipNumber}
-								placeholder="Enter Tip"
-								type='text'
-								name='username'
-								value={state.numInput}
-								onChange={() => {}}
-								margin="normal"
-							/>
-						</Grid>
+				<Grid container alignItems='center'>
+					<Grid item xs={2}>
+						<AttachMoney style={{ fontSize: 50, color: '#808080' }}/>
 					</Grid>
+					<Grid item xs>
+						<input
+							className={classes.tipNumber}
+							placeholder="Enter Tip"
+							type='text'
+							name='username'
+							value={tip}
+							onChange={() => {}}
+							margin="normal"
+						/>
+					</Grid>
+				</Grid>
 
-					<Grid container style={{ marginTop: '24px' }}>
-						
-						{nums.map(num => {
-							return (
-								<Grid key={num} item xs={4}> <button id={num} onClick={numClick} className={classes.button}>{num}</button></Grid>
-							)
-						})}
-
-						<Grid  item xs={4}><Button className={classes.button}>X</Button></Grid>
-						<Grid  item xs={4}><Button className={classes.button}>0</Button></Grid>
-						<Grid  item xs={4}>
-							<Button className={classes.checkButton}>
-								<Check style={{ fontSize: 60, color: 'white' }}/>
-							</Button>
-						</Grid>					
+				<Grid container style={{ marginTop: '24px' }}>
 					
-					</Grid>			
+					{nums.map(num => {
+						return (
+							<Grid key={num} item xs={4}> <button id={num} onClick={numClick} className={classes.button}>{num}</button></Grid>
+						)
+					})}
 
-				</Paper>
-			</>
-		);
-	
+					<Grid  item xs={4}><Button className={classes.button}>X</Button></Grid>
+					<Grid  item xs={4}><Button className={classes.button}>0</Button></Grid>
+					<Grid  item xs={4}>
+						<Button className={classes.checkButton} onClick={payment}>
+							<Check style={{ fontSize: 60, color: 'white' }}/>
+						</Button>
+					</Grid>					
+				
+				</Grid>			
+
+			</Paper>
+		</>
+	);	
 }
 
-export default TipPage;
+const mapStateToProps = (state) => {
+	console.log(state.waiterReducer.waiters)
+	return {
+		waiters: state.waiterReducer.waiters  
+	}	
+}
+
+export default connect(mapStateToProps, {})(TipPage);

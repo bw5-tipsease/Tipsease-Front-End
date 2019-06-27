@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import { AppBar, Toolbar, Typography, Avatar}   from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
+import { ArrowBackIos } from '@material-ui/icons';
 
 const useStyles = makeStyles({
 
@@ -14,23 +15,32 @@ const useStyles = makeStyles({
 	},
 	appBar: {
 		height: '50px'
+	},
+	arrow: {
+		color: '#339EF9',
+    	fontSize: '30px'
 	}
 
   });
 
 
 const TopBar = (props) => {
-	console.log(props.waiters[0].name)
+	console.log(props)
 	const classes = useStyles();
+
+	const previous = e => {
+		props.history.goBack()
+	}
 
 	return (
 
 		<AppBar className={classes.appBar} position="static" color="inherit" >
 			<Toolbar>
+				<ArrowBackIos className={classes.arrow} onClick={previous}/>
 				<Typography
-				className={classes.headerText} 
-				align="justify"
-				variant="h6" 
+					className={classes.headerText} 
+					align="justify"
+					variant="h6" 
 				>
 					TipsEase
 				</Typography> 

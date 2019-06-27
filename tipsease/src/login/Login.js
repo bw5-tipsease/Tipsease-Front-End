@@ -4,6 +4,7 @@ import { AppBar, Toolbar, Typography, Paper, TextField, Button, InputLabel, Grid
 import { makeStyles } from '@material-ui/core/styles';
 import TopBarHome from './TopBarHome';
 import { tablet } from "../styles/vars"
+import { login } from "../actions"
 
 
 const useStyles = makeStyles({
@@ -100,12 +101,18 @@ const Login = (props) => {
 
 	const login = e => {
 		e.preventDefault()
-		console.log("works")
+		// console.log("works")
+		console.log(props)
+		props.login(state.credentials)
+			.then(() => {
+			// const route = this.props.location.state.from || '/list-of-friends';
+			props.history.push(`/dashboard`)
+			})
 	}
 
 	const goSignUp = e => {
 		e.preventDefault() 
-		props.history.push('/') 
+		props.history.push('/signup') 
 	}
 
 	return (
@@ -121,33 +128,34 @@ const Login = (props) => {
 
 					<Grid item>
 						<form className="loginForm" onSubmit={login}>
-						<Typography className={classes.title}>Welcome back!</Typography>
-							<TextField
-								value={state.name}
-								name="loginName"
-								label="Username/Email"
-								onChange={handleChanges}
-								className={classes.textField}								
-							/>
+							<Typography className={classes.title}>Welcome back!</Typography>
+								<TextField
+									value={state.name}
+									name="loginName"
+									label="Username/Email"
+									onChange={handleChanges}
+									className={classes.textField}								
+								/>
 
-							<TextField
-								value={state.password}
-								name="password"
-								label="Password"
-								onChange={handleChanges}
-								className={classes.textField}					
-							/>	
+								<TextField
+									// type="password"
+									value={state.password}
+									name="password"
+									label="Password"
+									onChange={handleChanges}
+									className={classes.textField}					
+								/>	
 
-							<Button className={classes.buttonSign}>
-								Sign In
-							</Button>
+								<button className={classes.buttonSign}>
+									Sign In
+								</button>
 							</form>
 
-						<form>
-							<button onClick={goSignUp} className={classes.buttonAccount}>
-								Need an account?
-							</button>
-						</form>
+							<form>
+								<button onClick={goSignUp} className={classes.buttonAccount}>
+									Need an account?
+								</button>
+							</form>
 					</Grid>							
 				
 				</Grid>
@@ -166,4 +174,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, {})(Login);
+export default connect(mapStateToProps, {login})(Login);
