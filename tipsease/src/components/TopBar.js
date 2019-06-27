@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from "react-redux";
-import { AppBar, Toolbar, Typography, Avatar}   from '@material-ui/core/';
+import { AppBar, Toolbar, Typography, Avatar, Menu, MenuItem}   from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 import { ArrowBackIos } from '@material-ui/icons';
 
@@ -28,6 +28,16 @@ const TopBar = (props) => {
 	console.log(props)
 	const classes = useStyles();
 
+	const [anchorEl, setAnchorEl] = useState(null)
+
+	const openMenu = e => {
+		setAnchorEl(e.currentTarget)
+	}
+
+	const closeMenu = e => {
+		setAnchorEl(null)
+	}
+
 	const previous = e => {
 		props.history.goBack()
 	}
@@ -44,7 +54,17 @@ const TopBar = (props) => {
 				>
 					TipsEase
 				</Typography> 
-				<Avatar alt={props.waiters[0].name} src='https://i.ibb.co/bJHx1V7/DSC0496-rs.png' />				
+				<Avatar onClick={openMenu} alt={props.waiters[0].name} src='https://i.ibb.co/bJHx1V7/DSC0496-rs.png' />
+				<Menu 
+					anchorEl={anchorEl}
+					keepMounted
+					open={Boolean(anchorEl)}
+					onClose={closeMenu}
+				>
+					<MenuItem onClick={() => {}}>Dashboard</MenuItem>
+					<MenuItem onClick={() => {}}>Profile</MenuItem>
+					<MenuItem onClick={() => {}}>Logout</MenuItem>
+				</Menu>
 			</Toolbar>
 		</AppBar>
 	)
