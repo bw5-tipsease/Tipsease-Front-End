@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from "react-redux";
-import { AppBar, Toolbar, Typography, Avatar, Menu, MenuItem}   from '@material-ui/core/';
+import { AppBar, Toolbar, Typography, Avatar, Menu, MenuItem, CardMedia}   from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 import { ArrowBackIos } from '@material-ui/icons';
+import { getUserData } from '../actions'
 
 const useStyles = makeStyles({
 
@@ -25,8 +26,14 @@ const useStyles = makeStyles({
 
 
 const TopBar = (props) => {
-	console.log(props)
+	console.log(props.users)
 	const classes = useStyles();
+
+	useEffect(() => {
+		let id = localStorage.getItem('id')
+		props.getUserData(id)
+  	},[])
+
 
 	const [anchorEl, setAnchorEl] = useState(null)
 
@@ -42,6 +49,19 @@ const TopBar = (props) => {
 		props.history.goBack()
 	}
 
+	const logout = e => {
+		console.log('works')
+		localStorage.clear();
+		props.history.push('/') 
+	}
+
+	const goToProfile = e => {
+		console.log('works')
+		let id = localStorage.getItem('id')
+		// props.getUserData(id)
+		props.history.push(`/dashboard/user/${id}`)
+	}
+
 	return (
 
 		<AppBar className={classes.appBar} position="static" color="inherit" >
@@ -54,27 +74,28 @@ const TopBar = (props) => {
 				>
 					TipsEase
 				</Typography> 
-				<Avatar onClick={openMenu} alt={props.waiters[0].name} src='https://i.ibb.co/bJHx1V7/DSC0496-rs.png' />
+				{/* <CardMedia className={classes.img} image='https://i.ibb.co/379MSJF/tipsease-Logo.png' component='img' /> */}
+				<Avatar onClick={openMenu} alt={props.users.name} src={props.users.thumbnail_url} />
 				<Menu 
 					anchorEl={anchorEl}
 					keepMounted
 					open={Boolean(anchorEl)}
 					onClose={closeMenu}
 				>
-					<MenuItem onClick={() => {}}>Dashboard</MenuItem>
-					<MenuItem onClick={() => {}}>Profile</MenuItem>
-					<MenuItem onClick={() => {}}>Logout</MenuItem>
+					<MenuItem onClick={() => {props.history.push('/dashboard')}}>Dashboard</MenuItem>
+					<MenuItem onClick={goToProfile}>Profile</MenuItem>
+					<MenuItem onClick={logout}>Logout</MenuItem>
 				</Menu>
 			</Toolbar>
 		</AppBar>
-	)
+	)	
 }
 
 const mapStateToProps = (state) => {
-	console.log(state.waiterReducer.waiters)
+	console.log(state.userInfoReducer)
 	return {
-		waiters: state.waiterReducer.waiters  
+		users: state.userInfoReducer.userInfo  
 	}	
 }
 
-export default connect(mapStateToProps, {})(TopBar);
+export default connect(mapStateToProps, {getUserData})(TopBar);

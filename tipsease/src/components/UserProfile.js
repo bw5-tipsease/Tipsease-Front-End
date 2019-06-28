@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 import { Container, Card, CardMedia, Typography, Grid, Button, Divider, } from '@material-ui/core';
 import { Grade, GradeOutlined, AddCircle, AddCircleOutline } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles';
-import StarRatingComponent from 'react-star-rating-component';
 import TopBar from "../components/TopBar"
+import { getUserData } from "../actions/index"
+import { getServer } from '../actions/serverAction'
+import TimeStamp from "react-timestamp"
+
 
 const useStyles = makeStyles({
 	root: {
@@ -92,88 +95,85 @@ const useStyles = makeStyles({
 		letterSpacing: '-0.25px',
 		lineHeight: '27px',
 		fontWeight: '600',
-		color: '#FFFFFF'
+		color: 'white'
+	},
+	topGrid: {
+		background: 'linear-gradient(136.07deg, #6CD6FA 0%, #3A7AF2 100%)',
+		padding: '30px',
+		alignItems: 'flex-end'
+	},
+	profileImg: {
+		borderRadius: '100%'
 	}
 })
 
-const WaiterProfile = (props) => {
+const UserProfile = (props) => {
 	const classes = useStyles();
-	let index = props.match.params.id - 1
 
-	const goToTip = e => {
-		e.stopPropagation()
-		props.history.push(`/dashboard/tip/${props.waiters[index].id}`)
-	}
+	useEffect(() => {
+		let id = localStorage.getItem('id')
+		props.getUserData(id)
+  	},[])	
 
+
+	//   console.log(props.userInfo.transactions.tipPaid)
+	  console.log(props.servers)
 	return (
 		<> 
 			<TopBar {...props}/>
 			<Card>
+				<Grid className={classes.topGrid} container wrap='nowrap'> 	
 
-				<CardMedia image={props.waiters[index].img}>
-					<Grid container wrap='nowrap'> 
-						
-						<Grid item xs={8}>	
-							<Container className={classes.imgText}>						
-								<Typography variant='h5' className={classes.imgContentName}>{props.waiters[index].name}</Typography>
-								<Typography variant='subtitle2' className={classes.imgContent}>{props.waiters[index].username}</Typography>
-								<Typography variant='subtitle1' className={classes.imgContent}>{props.waiters[index].title}</Typography>					
-							</Container>						
-						</Grid>
+					<Grid item>
+						<CardMedia className={classes.profileImg} src={props.userInfo.thumbnail_url} component='img' />					
+					</Grid>
 
-						<Grid item xs={5} className={classes.imgStar}>
-							<StarRatingComponent
-								className={classes.star}
-								name={"waiter-rating"} 
-								starColor={"#FFFFFF"}
-								starCount={5}
-								value={props.waiters[index].rating}
-							/>		
-						</Grid>													
-					
-					</Grid>	
-					<Button className={classes.leaveTipButton} fullWidth='true' onClick={goToTip}>Leave Tip</Button>		
-				</CardMedia>
+					<Grid item xs={8}>	
+						<Container className={classes.imgText}>						
+							<Typography variant='h5' className={classes.imgContentName}>{props.userInfo.name}</Typography>
+							<Typography variant='subtitle2' className={classes.imgContent}>{props.userInfo.email}</Typography>
+						</Container>						
+					</Grid>					
+				</Grid>	
 
 				<Container className={classes.contBody}>
-					<Typography className={classes.locationTitle}>Location</Typography>
-					<Typography className={classes.location}>{props.waiters[index].location} - {props.waiters[index].lengthOfWork}</Typography>
+
 
 					<Divider className={classes.divider} />
 
 					<Typography className={classes.transTitle}>Transactions</Typography>
 					<Grid container wrap='nowrap' spacing='5'>
-						<Grid item xs={4}>	
-							{props.waiters[index].transactions.map((trans, i) => <Grid className={classes.date}>{trans.date}</Grid>)}				
+						<Grid item xs={5}>	
+							{props.userInfo.transactions.map((trans, i) => <Grid className={classes.date}><TimeStamp relative date={trans.created_at} /></Grid>)}				
 						</Grid>
 
-						<Grid item xs={4}>						
-							<Grid className={classes.date}>{props.waiters[index].location}</Grid>					
-							<Grid className={classes.date}>{props.waiters[index].location}</Grid>					
-							<Grid className={classes.date}>{props.waiters[index].location}</Grid>										
+						<Grid item xs={2}>		
+							{props.userInfo.transactions.map((trans, i) => <Grid className={classes.date}>{trans.server_id}</Grid>)}				
 						</Grid>
 
-						<Grid item xs={3}>	
-							{props.waiters[index].transactions.map((trans, i) => <Grid className={classes.amount}>${trans.amount}</Grid>)}	
+						<Grid item xs={2}>	
+							{props.userInfo.transactions.map((trans, i) => <Grid className={classes.amount}>${trans.tip_paid}</Grid>)}	
 						</Grid>
 					</Grid>
 
 					<Divider className={classes.divider} />
 
-					<Typography className={classes.transTitle}>Tagline</Typography>
-					<Typography className={classes.tag}>"{props.waiters[index].tagline}"</Typography>				
+					<Typography className={classes.transTitle}>Favorite Restaurant</Typography>
+					<Typography className={classes.tag}>"Sushi"</Typography>				
 				</Container>
 
+				
 			</Card>		
 		</>
 	)
 }
 
 const mapStateToProps = (state) => {
-	console.log(state.waiterReducer.waiters)
+	console.log(state.userInfoReducer.userInfo)
 	return {
-		waiters: state.waiterReducer.waiters  
+		userInfo: state.userInfoReducer.userInfo, 
+		servers: state.waiterReducer.servers
 	}	
 }
 
-export default connect(mapStateToProps, {})(WaiterProfile);
+export default connect(mapStateToProps, { getUserData, getServer })(UserProfile);

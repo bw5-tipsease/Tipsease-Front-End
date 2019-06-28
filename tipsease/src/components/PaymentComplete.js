@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from "react";
 import TopBar from "./TopBar"
 import { Check } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
@@ -24,16 +24,21 @@ const useStyles = makeStyles({
 		width: '250px'
 	},
 	paper: {
-		paddingBottom: '100px'
+		paddingBottom: '180px'
 	}
   });
+
+//   useEffect(() => {
+
+//   },[])
+
 
 const PaymentComplete = (props) => {
 	let username = props.match.params.id
 	const classes = useStyles();	
 
 	return (
-		
+	
 		<Paper className={classes.paper}>
 		<TopBar {...props}/>
 			<Check className={classes.a}/>

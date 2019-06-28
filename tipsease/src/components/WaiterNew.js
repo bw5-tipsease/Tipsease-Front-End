@@ -45,18 +45,18 @@ const useStyles = makeStyles({
 	}
 })
 
-const Waiter = (props) => {
-	console.log(props)
+const WaiterNew = (props) => {
+	console.log(props.server)
 	const classes = useStyles();
 
 	const goToTip = e => {
 		e.stopPropagation()
-		props.history.push(`/dashboard/tip/${props.waiter.id}`)
+		props.history.push(`/dashboard/tip/${props.server.id}`)
 	}
 	
 	const gotoProfile = e => {
 		console.log("works")
-		props.history.push(`/dashboard/waiter/${props.waiter.id}`)
+		props.history.push(`/dashboard/waiter/${props.server.id}`)
 	}
 
 	return (
@@ -65,18 +65,18 @@ const Waiter = (props) => {
 			<Grid container wrap='nowrap' spacing={1}>
 
 				<Grid item xs={4}>
-					<CardMedia className={classes.img} image={props.waiter.thumb} component='img' />
+					<CardMedia className={classes.img} image={props.server.thumbnail_url} component='img' />
 				</Grid>
 
 				<Grid item xs={5}>					
-					<Typography className={classes.name}>{props.waiter.name}</Typography>
-					<Typography className={classes.title}>{props.waiter.title}</Typography>
+					<Typography className={classes.name}>{props.server.name}</Typography>
+					<Typography className={classes.title}>Bartender</Typography>
 					<StarRatingComponent
 						className={classes.star}
 						name={"waiter-rating"} 
 						starColor={"#FFE624"}
 						starCount={5}
-						value={props.waiter.rating}
+						value={props.server.rating}
 					/>
 				</Grid>
 
@@ -84,7 +84,7 @@ const Waiter = (props) => {
 
 						<Fab 
 							onClick={goToTip}
-							value={props.waiter.id} 
+							value={props.server.id} 
 							color='primary' 
 							size='small' 
 							variant="extended" 
@@ -103,4 +103,4 @@ const Waiter = (props) => {
 	)
 }
 
-export default Waiter;
+export default WaiterNew;

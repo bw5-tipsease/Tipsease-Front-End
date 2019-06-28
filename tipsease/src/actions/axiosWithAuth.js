@@ -5,9 +5,9 @@ export const axiosWithAuth = () => {
 
 	return axios.create({
 		headers: {
-			Authorization: "Bearer " + token
+			Authorization: token
 		},
-		baseURL: 'http://localhost:5000/api'
+		baseURL: 'https://tipsease-be.herokuapp.com/api'
 	})
 }
 

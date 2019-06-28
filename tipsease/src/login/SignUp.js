@@ -5,7 +5,8 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Link, NavLink } from 'react-router-dom'
 import { MuiInputLabel } from '@material-ui/core'
 import TopBarHome from './TopBarHome';
-import { tablet } from "../styles/vars"
+import { tablet } from "../styles/vars";
+import { signup } from "../actions"
 
 
 const useStyles = makeStyles({
@@ -86,7 +87,7 @@ const SignUp = (props) => {
 
 	const [state, setState] = useState({
 		credentials: {		
-			username: '',
+			name: '',
 			password: '',
 			email: ''
 		}
@@ -104,7 +105,11 @@ const SignUp = (props) => {
 
 	const signup = e => {
 		e.preventDefault()
-		console.log("works")
+		props.signup(state.credentials)
+		.then(() => {
+		// const route = this.props.location.state.from || '/list-of-friends';
+		props.history.push(`/dashboard`)
+		})
 	}
 
 	const goLogin = e => {
@@ -144,6 +149,7 @@ const SignUp = (props) => {
 
 						<TextField
 							value={state.password}
+							type='password'
 							name="password"
 							label="Password"
 							onChange={handleChanges}
@@ -180,5 +186,5 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, {})(SignUp);
+export default connect(mapStateToProps, {signup})(SignUp);
 

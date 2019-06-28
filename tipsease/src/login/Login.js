@@ -84,7 +84,7 @@ const Login = (props) => {
 
 	const [state, setState] = useState({
 		credentials: {		
-			loginName: '',
+			email: '',
 			password: '',
 		}
 	})
@@ -131,7 +131,7 @@ const Login = (props) => {
 							<Typography className={classes.title}>Welcome back!</Typography>
 								<TextField
 									value={state.name}
-									name="loginName"
+									name="email"
 									label="Username/Email"
 									onChange={handleChanges}
 									className={classes.textField}								

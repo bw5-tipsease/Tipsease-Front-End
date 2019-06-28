@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Check, Money, AttachMoney } from '@material-ui/icons';
 import { connect } from "react-redux";
 import TopBar from "../components/TopBar"
+import { addTran } from "../actions/transAction"
 
 
 
@@ -62,25 +63,33 @@ const useStyles = makeStyles({
 const TipPage = (props) => {
 	const classes = useStyles();
 	let username = props.waiters[props.match.params.id - 1].username
-	
+	let serverId = props.waiters[props.match.params.id - 1].id	
 	
 	const [tip, setTip] = useState('')
-
-
 
 	const numClick = e => {
 		console.log(e.target.id)
 
-		if(tip === '') {
+		if(tip === '' || tip === '0') {
 			setTip(e.target.id)
 		} else {
 			setTip(tip + e.target.id)
 		}		
 	}
 
+	const clear = e => {
+		setTip('0')
+	}
+
 	const payment = e => {
 		e.preventDefault()
-		console.log('works')
+		// console.log('works')
+		let trans = {
+			tipper_id: localStorage.getItem('id'),
+			server_id: serverId,
+			tip_paid: tip
+		}
+		props.addTran(trans)
 		props.history.push(`/dashboard/tip/${props.match.params.id}/pay/${username}`) 
 	}
 
@@ -131,8 +140,8 @@ const TipPage = (props) => {
 						)
 					})}
 
-					<Grid  item xs={4}><Button className={classes.button}>X</Button></Grid>
-					<Grid  item xs={4}><Button className={classes.button}>0</Button></Grid>
+					<Grid  item xs={4}><button className={classes.button} onClick={clear}>X</button></Grid>
+					<Grid  item xs={4}><button className={classes.button} onClick={numClick} id={0}>0</button></Grid>
 					<Grid  item xs={4}>
 						<Button className={classes.checkButton} onClick={payment}>
 							<Check style={{ fontSize: 60, color: 'white' }}/>
@@ -153,4 +162,4 @@ const mapStateToProps = (state) => {
 	}	
 }
 
-export default connect(mapStateToProps, {})(TipPage);
+export default connect(mapStateToProps, {addTran})(TipPage);

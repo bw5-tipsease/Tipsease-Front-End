@@ -16,15 +16,15 @@ export const data = [
 		tagline: "It's the food you've always dreamed of",
 		transactions: [
 			{
-				date: 'May 29, 2019',
+				date: 'May 29',
 				amount: '12.34'
 			},
 			{
-				date: 'May 14, 2019',
+				date: 'May 14',
 				amount: '9.69'
 			},
 			{
-				date: 'April 20, 2019',
+				date: 'April 20',
 				amount: '11.00'
 			},
 		]
@@ -46,15 +46,15 @@ export const data = [
 		tagline: `If you love food , you'll love us`,
 		transactions: [
 			{
-				date: 'May 29, 2019',
+				date: 'May 29',
 				amount: '12.34'
 			},
 			{
-				date: 'May 14, 2019',
+				date: 'May 14',
 				amount: '9.69'
 			},
 			{
-				date: 'April 20, 2019',
+				date: 'April 20',
 				amount: '11.00'
 			},
 		]
@@ -75,15 +75,15 @@ export const data = [
 		tagline: 'Delighting food buffs',
 		transactions: [
 			{
-				date: 'May 29, 2019',
+				date: 'May 29',
 				amount: '12.34'
 			},
 			{
-				date: 'May 14, 2019',
+				date: 'May 14',
 				amount: '9.69'
 			},
 			{
-				date: 'April 20, 2019',
+				date: 'April 20',
 				amount: '11.00'
 			},
 		]
@@ -104,15 +104,15 @@ export const data = [
 		tagline: 'We do exemplary food',
 		transactions: [
 			{
-				date: 'May 29, 2019',
+				date: 'May 29',
 				amount: '12.34'
 			},
 			{
-				date: 'May 14, 2019',
+				date: 'May 14',
 				amount: '9.69'
 			},
 			{
-				date: 'April 20, 2019',
+				date: 'April 20',
 				amount: '11.00'
 			},
 		]

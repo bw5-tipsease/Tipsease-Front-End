@@ -9,6 +9,7 @@ import Dashboard from "../components/Dashboard"
 import TipPage from "../components/TipPage"
 import PaymentComplete from "../components/PaymentComplete"
 import WaiterProfile from "../components/WaiterProfile"
+import UserProfile from "../components/UserProfile"
 
 const SetRoutes = (props) => {	
 
@@ -22,6 +23,7 @@ const SetRoutes = (props) => {
 			<PrivateRoute exact path="/dashboard/tip/:id" component={TipPage} />
 			<PrivateRoute path="/dashboard/tip/:id/pay/:id" component={PaymentComplete} />
 			<PrivateRoute path="/dashboard/waiter/:id" component={WaiterProfile} />
+			<PrivateRoute path="/dashboard/user/:id" component={UserProfile} />
 
 
 
