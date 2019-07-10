@@ -7,6 +7,7 @@ import TopBar from "../components/TopBar"
 import { getUserData } from "../actions/index"
 import { getServer } from '../actions/serverAction'
 import TimeStamp from "react-timestamp"
+import Loader from 'react-loader-spinner'
 
 
 const useStyles = makeStyles({
@@ -116,54 +117,71 @@ const UserProfile = (props) => {
   	},[])	
 
 
-	//   console.log(props.userInfo.transactions.tipPaid)
-	  console.log(props.servers)
+	// console.log(props.userInfo.transactions.length)
+	// console.log(props.servers)
+
+	// props.fetchingUser ? (
+	// 	<Loader type="ThreeDots" color="#1f2a38" height="12" width="26" />
+	// ) : ()
+
 	return (
-		<> 
+		<>
 			<TopBar {...props}/>
-			<Card>
-				<Grid className={classes.topGrid} container wrap='nowrap'> 	
 
-					<Grid item>
-						<CardMedia className={classes.profileImg} src={props.userInfo.thumbnail_url} component='img' />					
-					</Grid>
+				<Card>
+					<Grid className={classes.topGrid} container wrap='nowrap'> 	
 
-					<Grid item xs={8}>	
-						<Container className={classes.imgText}>						
-							<Typography variant='h5' className={classes.imgContentName}>{props.userInfo.name}</Typography>
-							<Typography variant='subtitle2' className={classes.imgContent}>{props.userInfo.email}</Typography>
-						</Container>						
-					</Grid>					
-				</Grid>	
-
-				<Container className={classes.contBody}>
-
-
-					<Divider className={classes.divider} />
-
-					<Typography className={classes.transTitle}>Transactions</Typography>
-					<Grid container wrap='nowrap' spacing='5'>
-						<Grid item xs={5}>	
-							{props.userInfo.transactions.map((trans, i) => <Grid className={classes.date}><TimeStamp relative date={trans.created_at} /></Grid>)}				
+						<Grid item>
+							<CardMedia className={classes.profileImg} src={props.userInfo.thumbnail_url} component='img' />					
 						</Grid>
 
-						<Grid item xs={2}>		
-							{props.userInfo.transactions.map((trans, i) => <Grid className={classes.date}>{trans.server_id}</Grid>)}				
-						</Grid>
+						<Grid item xs={8}>	
+							<Container className={classes.imgText}>						
+								<Typography variant='h5' className={classes.imgContentName}>{props.userInfo.name}</Typography>
+								<Typography variant='subtitle2' className={classes.imgContent}>{props.userInfo.email}</Typography>
+							</Container>						
+						</Grid>					
+					</Grid>	
 
-						<Grid item xs={2}>	
-							{props.userInfo.transactions.map((trans, i) => <Grid className={classes.amount}>${trans.tip_paid}</Grid>)}	
-						</Grid>
-					</Grid>
+					<Container className={classes.contBody}>
 
-					<Divider className={classes.divider} />
 
-					<Typography className={classes.transTitle}>Favorite Restaurant</Typography>
-					<Typography className={classes.tag}>"Sushi"</Typography>				
-				</Container>
+						<Divider className={classes.divider} />
 
-				
-			</Card>		
+						{props.fetchingUser && (
+							<div className="key spinner">
+								<Loader type="Puff" color="#204963" height="60" width="60" />
+								<p>Loading Data</p>
+							</div>
+						)}
+
+						{props.error && <h4>{props.error}</h4>}
+
+							{/* <Typography className={classes.transTitle}>Transactions</Typography>
+							{!props.fetchingUser && props.userInfo.transactions.length > 0 && (
+							<>
+							<Grid container wrap='nowrap' spacing='5'>
+								<Grid item xs={5}>	
+									{props.userInfo.transactions.map((trans, i) => <Grid className={classes.date}><TimeStamp relative date={trans.created_at} /></Grid>)}				
+								</Grid>
+
+								<Grid item xs={2}>		
+									{props.userInfo.transactions.map((trans, i) => <Grid className={classes.date}>{trans.server_name}</Grid>)}				
+								</Grid>
+
+								<Grid item xs={2}>	
+									{props.userInfo.transactions.map((trans, i) => <Grid className={classes.amount}>${trans.tip_paid}</Grid>)}	
+								</Grid>
+							</Grid>
+							</> 
+						)} */}
+
+						<Divider className={classes.divider} />
+
+						<Typography className={classes.transTitle}>Favorite Restaurant</Typography>
+						<Typography className={classes.tag}>"Sushi"</Typography>				
+					</Container>				
+				</Card>		
 		</>
 	)
 }
@@ -172,7 +190,8 @@ const mapStateToProps = (state) => {
 	console.log(state.userInfoReducer.userInfo)
 	return {
 		userInfo: state.userInfoReducer.userInfo, 
-		servers: state.waiterReducer.servers
+		fetchingUser: state.userInfoReducer.fetchingUser,
+		error: state.userInfoReducer.error 
 	}	
 }
 

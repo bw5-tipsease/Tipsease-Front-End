@@ -17,7 +17,10 @@ export const login = creds => dispatch => {
 			localStorage.setItem('id', res.data.userID)
 			dispatch({ type: LOGIN_SUCCESS, payload: res.data.token })
 		})
-		.catch(err => console.log(err.response))
+		.catch(err => {
+			console.log(err.response.data.message)
+			dispatch({ type: LOGIN_FAIL, payload: err.response.data.message })
+		})
 }
 
 //  Exports for signin Dispatches 
@@ -54,7 +57,7 @@ export const getUserData = (id) => dispatch => {
 		})
 		.catch(err => {
 			console.log(err.response)
-			// dispatch({ type: FETCH_USER_FAIL, payload: err.response.statusText });
+			dispatch({ type: FETCH_USER_FAIL, payload: err.response.data.message });
 		})
 }
 

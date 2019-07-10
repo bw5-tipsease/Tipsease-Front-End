@@ -22,10 +22,21 @@ export const loginReducer = (state = initialState, action) => {
 			}
 	
 		case LOGIN_SUCCESS:
+				console.log(action.payload)
 			return {
 				...state,
-				loggingIn: false
+				loggingIn: false,
+				error: ''
 			}
+
+		case LOGIN_FAIL:
+				console.log(action.payload)
+			return {
+				...state,
+				loggingIn: false,
+				error: action.payload
+			}
+
 		default:
 		return state;
 	}

@@ -37,7 +37,7 @@ const WaiterInfoContainer = (props) => {
 
 	return (
 		<>
-			<Typography className={classes.title}>Service Worker</Typography>	
+			<Typography className={classes.title}>Waiters</Typography>	
 			{props.waiters.map((waiter, i) => {
 				return (
 					<Waiter 

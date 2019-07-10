@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TopBarHome from './TopBarHome';
 import { tablet } from "../styles/vars"
 import { login } from "../actions"
+import Loader from 'react-loader-spinner'
 
 
 const useStyles = makeStyles({
@@ -75,6 +76,9 @@ const useStyles = makeStyles({
     		paddingTop: '151px',
 			alignItems: 'end'
 		}
+	},
+	error: {
+		color: 'red'
 	}
   });
 
@@ -144,11 +148,17 @@ const Login = (props) => {
 									label="Password"
 									onChange={handleChanges}
 									className={classes.textField}					
-								/>	
+								/>
 
-								<button className={classes.buttonSign}>
-									Sign In
-								</button>
+								{props.error && <p className={classes.error}>>{props.error}</p>}	
+
+									<button className={classes.buttonSign}>
+										{props.loggingIn ? (
+             								<Loader type="ThreeDots" color="#1f2a38" height="12" width="26" />
+										) : (
+											'Sign In'
+										)}
+									</button>
 							</form>
 
 							<form>
