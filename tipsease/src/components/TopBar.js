@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 
 
 const TopBar = (props) => {
-	console.log(props.users)
+	// console.log(props.users, 'users from props')
 	const classes = useStyles();
 
 	useEffect(() => {
@@ -50,13 +50,13 @@ const TopBar = (props) => {
 	}
 
 	const logout = e => {
-		console.log('works')
+		// console.log('works')
 		localStorage.clear();
 		props.history.push('/') 
 	}
 
 	const goToProfile = e => {
-		console.log('works')
+		// console.log('works')
 		let id = localStorage.getItem('id')
 		// props.getUserData(id)
 		props.history.push(`/dashboard/user/${id}`)
@@ -92,7 +92,7 @@ const TopBar = (props) => {
 }
 
 const mapStateToProps = (state) => {
-	console.log(state.userInfoReducer)
+	// console.log(state.userInfoReducer)
 	return {
 		users: state.userInfoReducer.userInfo  
 	}	

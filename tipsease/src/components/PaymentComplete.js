@@ -34,6 +34,7 @@ const useStyles = makeStyles({
 
 
 const PaymentComplete = (props) => {
+	console.log(props, 'props from payment complete')
 	let username = props.match.params.id
 	const classes = useStyles();	
 

@@ -144,7 +144,7 @@ const WaiterProfile = (props) => {
 					<Typography className={classes.transTitle}>Transactions</Typography>
 					<Grid container wrap='nowrap' spacing='5'>
 						<Grid item xs={4}>	
-							{props.waiters[index].transactions.map((trans, i) => <Grid className={classes.date}>{trans.date}</Grid>)}				
+							{props.waiters[index].transactions.map((trans, i) => <Grid key={trans.id} className={classes.date}>{trans.date}</Grid>)}				
 						</Grid>
 
 						<Grid item xs={4}>						
@@ -154,7 +154,7 @@ const WaiterProfile = (props) => {
 						</Grid>
 
 						<Grid item xs={3}>	
-							{props.waiters[index].transactions.map((trans, i) => <Grid className={classes.amount}>${trans.amount}</Grid>)}	
+							{props.waiters[index].transactions.map((trans, i) => <Grid key={trans.id} className={classes.amount}>${trans.amount}</Grid>)}	
 						</Grid>
 					</Grid>
 

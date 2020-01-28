@@ -62,6 +62,7 @@ const useStyles = makeStyles({
 
 const TipPage = (props) => {
 	const classes = useStyles();
+	console.log(props.waiters, "Waiter Data in TIPPAGE.JS")
 	let username = props.waiters[props.match.params.id - 1].username
 	let serverId = props.waiters[props.match.params.id - 1].id	
 	

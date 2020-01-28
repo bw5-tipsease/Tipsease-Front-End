@@ -157,24 +157,25 @@ const UserProfile = (props) => {
 
 						{props.error && <h4>{props.error}</h4>}
 
-							{/* <Typography className={classes.transTitle}>Transactions</Typography>
+							<Typography className={classes.transTitle}>Transactions</Typography>
 							{!props.fetchingUser && props.userInfo.transactions.length > 0 && (
 							<>
 							<Grid container wrap='nowrap' spacing='5'>
-								<Grid item xs={5}>	
-									{props.userInfo.transactions.map((trans, i) => <Grid className={classes.date}><TimeStamp relative date={trans.created_at} /></Grid>)}				
-								</Grid>
+								{console.log(props.userInfo.transactions, "trans from userProfile.js")}
+								{/* <Grid item xs={5}>	
+									{props.userInfo.transactions.map((trans, i) => <Grid key={trans.id} className={classes.date}><TimeStamp relative date={trans.created_at} /></Grid>)}				
+								</Grid> */}
 
-								<Grid item xs={2}>		
-									{props.userInfo.transactions.map((trans, i) => <Grid className={classes.date}>{trans.server_name}</Grid>)}				
+								<Grid item xs={5}>		
+									{props.userInfo.transactions.map((trans, i) => <Grid key={trans.id} className={classes.date}>{trans.server_name}</Grid>)}				
 								</Grid>
 
 								<Grid item xs={2}>	
-									{props.userInfo.transactions.map((trans, i) => <Grid className={classes.amount}>${trans.tip_paid}</Grid>)}	
+									{props.userInfo.transactions.map((trans, i) => <Grid key={trans.id} className={classes.amount}>${trans.tip_paid}</Grid>)}	
 								</Grid>
 							</Grid>
 							</> 
-						)} */}
+						)}
 
 						<Divider className={classes.divider} />
 
